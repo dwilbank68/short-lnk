@@ -23,14 +23,14 @@ const routes = (
 )
 
 Tracker.autorun(() => {
-    const isAuthenticated = !!Meteor.userId();
+    const isAuth = !!Meteor.userId();
     const pathname = browserHistory
                             .getCurrentLocation()
                             .pathname;
     const isUnauthPage =    unauthPages.includes(pathname);
     const isAuthPage =      authPages.includes (pathname);
-    if (isUnauthPage) browserHistory.push('/links');
-    if (isAuthPage) browserHistory.push('/');
+    if (isUnauthPage && isAuth) browserHistory.push('/links');
+    if (isAuthPage && !isAuth) browserHistory.push('/');
 })
 
 Meteor.startup(() => {
