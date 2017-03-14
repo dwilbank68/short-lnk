@@ -1,28 +1,42 @@
 import React, { Component, PropTypes } from 'react';
 import {Link} from 'react-router';
+import {Meteor} from 'meteor/meteor';
 
 class LogIn extends Component {
 
-    // constructor(props, context){
-    //     super(props, context);
-    //     this.state = {
-    //         'whatever':{}
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    // }
+    constructor(props, context){
+        super(props, context);
+        this.state = {
+            error: ''
+        }
+       this.onSubmit = this.onSubmit.bind(this)
+    }
 
 
-    // handleSubmit(e) {
-    //    ...
-    //    this.setState({
-    //        ...
-    //    })
-    // }
+    onSubmit(e){
+        e.preventDefault();
+        let email = this.refs.email.value.trim();
+        let password = this.refs.password.value.trim();
+        Meteor
+            .loginWithPassword(
+                {email},
+                password,
+                (err) => { console.log(err);}
+            )
+    }
 
     render() {
         return (
             <div className="log-in">
-                <h1>Login to Short Link</h1>
+                <h1>Short Link</h1>
+
+                {this.state.error ? <p>{this.state.error}</p> : undefined}
+
+                <form onSubmit ={this.onSubmit}>
+                    <input type="email"     ref="email"     name="email"    placeholder="Email"/>
+                    <input type="password"  ref="password"  name="password" placeholder="Password"/>
+                    <button>Log In </button>
+                </form>
 
                 <Link to="/signup ">Have an account?</Link>
 

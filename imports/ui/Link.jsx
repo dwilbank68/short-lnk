@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import {browserHistory} from 'react-router';
+import {Accounts} from 'meteor/accounts-base';
+// import {browserHistory} from 'react-router';
 
 class Link extends Component {
 
@@ -20,7 +21,7 @@ class Link extends Component {
     // }
 
     onLogOut(){
-        browserHistory.push('/');
+        Accounts.logout();
     }
 
     render() {
