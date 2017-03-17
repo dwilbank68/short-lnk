@@ -1,18 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import {Meteor} from 'meteor/meteor';
+import {Tracker} from 'meteor/tracker';
 
 import {Links} from '../api/links';
-import {Tracker} from 'meteor/tracker';
+import LinksListItem from './LinksListItem';
 
 class LinksList extends Component {
 
     componentDidMount() {
         this.linksTracker =
-        Tracker.autorun(() => {
-            Meteor.subscribe('links');
-            let links = Links.find( ).fetch();
-            this.setState({links});
-        })
+            Tracker.autorun(() => {
+                Meteor.subscribe('links');
+                let links = Links.find().fetch();
+                this.setState({links});
+            })
     }
 
     componentWillUnmount() {
@@ -20,25 +21,20 @@ class LinksList extends Component {
     }
 
 
-    constructor(props, context){
+    constructor(props, context) {
         super(props, context);
         this.state = {
             links: []
         }
-       // this.handleClick = this.handleClick.bind(this)
     }
 
-
-    // handleSubmit(e) {
-    //    ...
-    //    this.setState({
-    //        ...
-    //    })
-    // }
-    renderLinksListItems(){
-        return this.state.links.map((link) => (
-            <p  key={link._id}>{link.url}</p>
-        ))
+    renderLinksListItems() {
+        return this.state.links.map((link) => {
+            const shortUrl = Meteor.absoluteUrl(link._id);
+            return <LinksListItem key={link._id}
+                                  shortUrl={shortUrl}
+                                  {...link}/>
+        })
     }
 
     render() {
@@ -78,32 +74,27 @@ export default LinksList;
 // 4. _.bindAll(this,'methodName','...')
 
 
-
-
-
-
-
 //////////////// alternative using ES2016 Property Initializer ////////////////
 
 // no more constructor - no more 'this' binding required
 
 // class LinksList extends Component {
 
-    // this.state = {
-    //     'whatever':{}
-    // }
+// this.state = {
+//     'whatever':{}
+// }
 
-    // handleSubmit = (e) => {
-    //    ...
-    //    this.setState({
-    //        ...
-    //    })
-    // }
+// handleSubmit = (e) => {
+//    ...
+//    this.setState({
+//        ...
+//    })
+// }
 
-    // render() {
-    //     return (
-    //         <div className="links-list">
-    //         </div>
-    //     );
-    // }
+// render() {
+//     return (
+//         <div className="links-list">
+//         </div>
+//     );
+// }
 // }
