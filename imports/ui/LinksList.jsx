@@ -1,60 +1,60 @@
 import React, { Component, PropTypes } from 'react';
-import {Link} from 'react-router';
 import {Meteor} from 'meteor/meteor';
 
-class LogIn extends Component {
+import {Links} from '../api/links';
+import {Tracker} from 'meteor/tracker';
+
+class LinksList extends Component {
+
+    componentDidMount() {
+        this.linksTracker =
+        Tracker.autorun(() => {
+            Meteor.subscribe('links');
+            let links = Links.find( ).fetch();
+            this.setState({links});
+        })
+    }
+
+    componentWillUnmount() {
+        this.linksTracker.stop();
+    }
+
 
     constructor(props, context){
         super(props, context);
         this.state = {
-            error: ''
+            links: []
         }
-       this.onSubmit = this.onSubmit.bind(this)
+       // this.handleClick = this.handleClick.bind(this)
     }
 
 
-    onSubmit(e){
-        e.preventDefault();
-        let email = this.refs.email.value.trim();
-        let password = this.refs.password.value.trim();
-        Meteor
-            .loginWithPassword(
-                {email},
-                password,
-                (err) => {
-                    if (err) {
-                        this.setState({
-                            error: 'Unable to login. Check email & password'}
-                        );
-                    } else {
-                        this.setState({error: ''})
-                    }
-                }
-            )
+    // handleSubmit(e) {
+    //    ...
+    //    this.setState({
+    //        ...
+    //    })
+    // }
+    renderLinksListItems(){
+        return this.state.links.map((link) => (
+            <p  key={link._id}>{link.url}</p>
+        ))
     }
 
     render() {
         return (
-            <div className="log-in">
-                <h1>Short Link</h1>
-
-                {this.state.error ? <p>{this.state.error}</p> : undefined}
-
-                <form onSubmit ={this.onSubmit} noValidate>
-                    <input type="email"     ref="email"     name="email"    placeholder="Email"/>
-                    <input type="password"  ref="password"  name="password" placeholder="Password"/>
-                    <button>Log In </button>
-                </form>
-
-                <Link to="/signup">Have an account?</Link>
-
+            <div className="links-list">
+                <p>Links List</p>
+                <div>
+                    {this.renderLinksListItems()}
+                </div>
             </div>
         );
     }
 }
 
-// LogIn.defaultProps = {};
-// LogIn.propTypes = {
+// LinksList.defaultProps = {};
+// LinksList.propTypes = {
 //     name:        PropTypes.string.isRequired,
 //     id:          PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]).isRequired,
 //     message:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
@@ -64,12 +64,12 @@ class LogIn extends Component {
 //
 // PropTypes -> array, bool, func, number, object, string, symbol
 
-// LogIn.contextTypes = {
+// LinksList.contextTypes = {
 //     router: React.PropTypes.object.isRequired
 // }
 // (lets you do 'this.context.router.push('/wherever');
 
-export default LogIn;
+export default LinksList;
 
 // remember to use 'this' binding now (choose one, #1 is best)
 // 1. In constructor (see constructor above)
@@ -87,7 +87,7 @@ export default LogIn;
 
 // no more constructor - no more 'this' binding required
 
-// class LogIn extends Component {
+// class LinksList extends Component {
 
     // this.state = {
     //     'whatever':{}
@@ -102,7 +102,7 @@ export default LogIn;
 
     // render() {
     //     return (
-    //         <div className="login">
+    //         <div className="links-list">
     //         </div>
     //     );
     // }
