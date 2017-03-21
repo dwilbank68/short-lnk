@@ -9,11 +9,12 @@ const Link = (props) => {
 
     return (
         <div className="link">
-
-            <LinksListFilters/>
             <PrivateHeader title="Your Links"/>
-            <AddLink/>
-            <LinksList/>
+            <div className="page-content">
+                <LinksListFilters/>
+                <AddLink/>
+                <LinksList/>
+            </div>
         </div>
     );
 };

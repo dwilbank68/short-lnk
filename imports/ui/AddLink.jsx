@@ -63,16 +63,19 @@ class AddLink extends Component {
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                    <form onSubmit={this.onSubmit}>
+                    <form   onSubmit={this.onSubmit}
+                            className="boxed-view__form">
                         <input  type="text" ref="url"
                                 onChange={this.onChange}
                                 placeholder="URL"
                                 value={this.state.url}/>
-                        <button>Add Link</button>
+                        <button className="button">Add Link</button>
+                        <button onClick={this.handleModalClose}
+                                className="button button--secondary" type="button">
+                            cancel
+                        </button>
                     </form>
-                    <button onClick={this.handleModalClose}>
-                        cancel
-                    </button>
+
                 </Modal>
             </div>
         );

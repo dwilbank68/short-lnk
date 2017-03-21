@@ -22,3 +22,21 @@
   color: $button-pill-color;
   padding: .3rem .8rem;
 }
+
+.button--secondary {
+  background-color: $button-secondary-bg;
+  border: 1px solid $button-secondary-bg;
+  color: #777;
+}
+
+.button--link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.button--link-text {
+  background: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+}
