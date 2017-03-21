@@ -3,6 +3,8 @@ import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
 import {Session} from 'meteor/session';
 
+import FlipMove from 'react-flip-move';
+
 import {Links} from '../api/links';
 import LinksListItem from './LinksListItem';
 
@@ -34,8 +36,8 @@ class LinksList extends Component {
     renderLinksListItems() {
         if (this.state.links.length === 0) {
             return (
-                <div>
-                    <p>No links found</p>
+                <div className="item">
+                    <p className="item__status-message">No links found</p>
                 </div>
             )
         }
@@ -50,9 +52,10 @@ class LinksList extends Component {
     render() {
         return (
             <div className="links-list">
-                <p>Links List</p>
                 <div>
-                    {this.renderLinksListItems()}
+                    <FlipMove maintainContainerHeight={true}>
+                        {this.renderLinksListItems()}
+                    </FlipMove>
                 </div>
             </div>
         );

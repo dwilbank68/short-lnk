@@ -43,10 +43,9 @@ class LinksListItem extends Component {
 
     render() {
         return (
-            <div className="links-list-item" >
-                <h3>{this.props.url}</h3>
-                <p>{this.props.shortUrl}</p>
-                <p>{this.props.visible.toString()}</p>
+            <div className="links-list-item item" >
+                <h2>{this.props.url}</h2>
+                <p className="item__message">{this.props.shortUrl}</p>
                 {this.renderStats()}
                 <a  className="button button--pill button--link"
                     href={this.props.shortUrl}
@@ -75,7 +74,9 @@ class LinksListItem extends Component {
             visitedMsg = `(visited ${moment(this.props.lastVisitedAt).fromNow()})`
         }
         return (
-            <p>{this.props.visitedCount} {visitMsg} {visitedMsg}</p>
+            <p className="item__message">
+                {this.props.visitedCount} {visitMsg} {visitedMsg}
+            </p>
         )
     }
 
