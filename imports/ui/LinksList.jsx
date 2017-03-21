@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {Meteor} from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
 
 import {Links} from '../api/links';
 import LinksListItem from './LinksListItem';
@@ -11,7 +12,9 @@ class LinksList extends Component {
         this.linksTracker =
             Tracker.autorun(() => {
                 Meteor.subscribe('links');
-                let links = Links.find().fetch();
+                let links = Links.find({
+                    visible: Session.get('showVisible')
+                }).fetch();
                 this.setState({links});
             })
     }

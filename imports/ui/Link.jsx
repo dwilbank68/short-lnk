@@ -1,19 +1,19 @@
 import React, { PropTypes } from 'react';
 
-import {Links} from '../api/links';
 import LinksList from './LinksList.jsx';
 import PrivateHeader from './PrivateHeader';
 import AddLink from './AddLink';
+import LinksListFilters from './LinksListFilters';
 
 const Link = (props) => {
 
     return (
         <div className="link">
 
+            <LinksListFilters/>
             <PrivateHeader title="Your Links"/>
-            <LinksList/>
             <AddLink/>
-
+            <LinksList/>
         </div>
     );
 };

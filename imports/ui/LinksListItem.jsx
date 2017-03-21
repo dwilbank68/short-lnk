@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Clipboard from 'clipboard';
+import {Meteor} from 'meteor/meteor';
+import moment from 'moment';
 
 // import LinksListItem from './LinksListItem.jsx';
 class LinksListItem extends Component {
@@ -8,10 +10,13 @@ class LinksListItem extends Component {
         this.clipboard = new Clipboard(this.refs.copy);
         this.clipboard
                 .on('success', () => {
-                    alert('worked')
+                    this.setState({copied: true});
+                    setTimeout(() => {
+                        this.setState({copied: false});
+                    }, 1000);
                 })
                 .on('error', () => {
-                    alert('unable to copy')
+                    alert('error - you must manually copy the short url');
                 })
 
     }
@@ -20,13 +25,13 @@ class LinksListItem extends Component {
         this.clipboard.destroy();
     }
 
-    // constructor(props, context){
-    //     super(props, context);
-    //     this.state = {
-    //         whatever:{}
-    //     }
-    //    this.handleClick = this.handleClick.bind(this)
-    // }
+    constructor(props, context){
+        super(props, context);
+        this.state = {
+            copied:false
+        }
+       // this.handleClick = this.handleClick.bind(this)
+    }
 
 
     // handleClick(e) {
@@ -41,20 +46,50 @@ class LinksListItem extends Component {
             <div className="links-list-item" >
                 <h3>{this.props.url}</h3>
                 <p>{this.props.shortUrl}</p>
-                <button ref="copy" data-clipboard-text={this.props.shortUrl}>
-                    copy
+                <p>{this.props.visible.toString()}</p>
+                {this.renderStats()}
+                <a  className="button button--pill button--link"
+                    href={this.props.shortUrl}
+                    target="_blank">
+                    Visit
+                </a>
+                <button className="button button--pill"
+                        ref="copy"
+                        data-clipboard-text={this.props.shortUrl}>
+                    {this.state.copied ? 'copied':'copy'}
+                </button>
+                <button className="button button--pill"
+                        onClick={() => {
+                    Meteor.call('links.setVisibility', this.props._id, !this.props.visible)
+                }}>
+                    {this.props.visible ? 'Hide':'Unhide'}
                 </button>
             </div>
         );
     }
+
+    renderStats(){
+        const visitMsg = this.props.visitedCount === 1 ? 'visit':'visits';
+        let visitedMsg = null;
+        if (typeof this.props.lastVisitedAt === 'number'){
+            visitedMsg = `(visited ${moment(this.props.lastVisitedAt).fromNow()})`
+        }
+        return (
+            <p>{this.props.visitedCount} {visitMsg} {visitedMsg}</p>
+        )
+    }
+
 }
 
 // LinksListItem.defaultProps = {};
 LinksListItem.propTypes = {
-    _id:        PropTypes.string.isRequired,
-    url:        PropTypes.string.isRequired,
-    shortUrl:   PropTypes.string.isRequired,
-    userId:     PropTypes.string.isRequired,
+    _id:            PropTypes.string.isRequired,
+    url:            PropTypes.string.isRequired,
+    shortUrl:       PropTypes.string.isRequired,
+    userId:         PropTypes.string.isRequired,
+    visible:        PropTypes.bool.isRequired,
+    visitedCount:   PropTypes.number.isRequired,
+    lastVisitedAt:  PropTypes.number
 //     key:     PropTypes.shape({ title: PropTypes.string, text: PropTypes.string }).isRequired,
 //     comments:    PropTypes.arrayOf(React.PropTypes.object),
 //     date:        PropTypes.instanceOf(Date)

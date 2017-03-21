@@ -35,18 +35,20 @@ class LogIn extends Component {
 
     render() {
         return (
-            <div className="log-in">
-                <h1>Short Link</h1>
+            <div className="log-in boxed-view">
+                <div className="boxed-view__box">
+                    <h1>Short Link</h1>
 
-                {this.state.error ? <p>{this.state.error}</p> : undefined}
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
 
-                <form onSubmit ={this.onSubmit} noValidate>
-                    <input type="email"     ref="email"     name="email"    placeholder="Email"/>
-                    <input type="password"  ref="password"  name="password" placeholder="Password"/>
-                    <button>Log In </button>
-                </form>
+                    <form onSubmit ={this.onSubmit} noValidate className="boxed-view__form">
+                        <input type="email"     ref="email"     name="email"    placeholder="Email"/>
+                        <input type="password"  ref="password"  name="password" placeholder="Password"/>
+                        <button className="button">Log In </button>
+                    </form>
 
-                <Link to="/signup">Have an account?</Link>
+                    <Link to="/signup">Have an account?</Link>
+                </div>
 
             </div>
         );

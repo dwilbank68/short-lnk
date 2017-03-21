@@ -1,32 +1,79 @@
 import React, { Component, PropTypes } from 'react';
 import {Meteor} from 'meteor/meteor';
+import Modal from 'react-modal';
 
 // import AddLink from './AddLink.jsx';
 class AddLink extends Component {
 
     constructor(props, context){
         super(props, context);
-       this.onSubmit = this.onSubmit.bind(this)
+        this.state = {
+            url: '',
+            isOpen: false,
+            error: ''
+        }
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.handleModalClose = this.handleModalClose.bind(this);
     }
 
+    handleModalClose(){
+        this.setState({
+            isOpen: false,
+            url: '',
+            error: ''
+        })
+    }
+
+    onChange(e){
+        e.preventDefault();
+        this.setState({
+            url: e.target.value
+        })
+    }
 
     onSubmit(e) {
-        const url = this.refs.url.value.trim();
         e.preventDefault();
-        if (url) {
-            Meteor.call('links.insert', url);
-            this.refs.url.value = '';
-        }
+        const url = this.state.url;
+
+        Meteor.call('links.insert', url, (err, res) => {
+            if (!err) {
+                this.handleModalClose();
+            } else {
+                this.setState({error: err.reason});
+            }
+        });
+
     }
 
     render() {
         return (
             <div className="add-link">
-                <p>Add Link</p>
-                <form onSubmit={this.onSubmit}>
-                    <input type="text" ref="url" placeholder="URL"/>
-                    <button>Add Link</button>
-                </form>
+                <button className="button"
+                        onClick={() => this.setState({isOpen:true})}>
+                    + Add Link
+                </button>
+                <Modal  className="boxed-view__box"
+                        overlayClassName="boxed-view boxed-view--modal"
+                        isOpen={this.state.isOpen}
+                        contentLabel="Add link"
+                        onAfterOpen={() => this.refs.url.focus()}
+                        onRequestClose={this.handleModalClose}>
+                    <h1>Add Link</h1>
+
+                    {this.state.error ? <p>{this.state.error}</p> : undefined}
+
+                    <form onSubmit={this.onSubmit}>
+                        <input  type="text" ref="url"
+                                onChange={this.onChange}
+                                placeholder="URL"
+                                value={this.state.url}/>
+                        <button>Add Link</button>
+                    </form>
+                    <button onClick={this.handleModalClose}>
+                        cancel
+                    </button>
+                </Modal>
             </div>
         );
     }
