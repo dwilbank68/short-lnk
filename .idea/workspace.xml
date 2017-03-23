@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2821b043-21e9-4bb1-b2a9-62c0fbb61fa0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/client/styles/components/_button.scss" afterPath="$PROJECT_DIR$/imports/client/styles/components/_button.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/client/styles/components/_item.scss" afterPath="$PROJECT_DIR$/imports/client/styles/components/_item.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/LinksListItem.jsx" afterPath="$PROJECT_DIR$/imports/ui/LinksListItem.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="short-lnk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -103,16 +101,6 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_page-content.scss" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/imports/client/styles/components/_page-content.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="20">
-                  <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="_checkbox.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/imports/client/styles/components/_checkbox.scss">
               <provider selected="true" editor-type-id="text-editor">
@@ -159,7 +147,6 @@
       <list>
         <option value="$PROJECT_DIR$/client/imports/ui/SignUp.jsx" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/imports/routes/routes.jsx" />
         <option value="$PROJECT_DIR$/client/LinksList.jsx" />
         <option value="$PROJECT_DIR$/readme.md" />
@@ -190,6 +177,7 @@
         <option value="$PROJECT_DIR$/imports/ui/LinksListItem.jsx" />
         <option value="$PROJECT_DIR$/imports/client/styles/components/_item.scss" />
         <option value="$PROJECT_DIR$/imports/client/styles/components/_button.scss" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -494,12 +482,12 @@
       <updated>1489440511388</updated>
       <workItem from="1489440514615" duration="38643000" />
       <workItem from="1489680974737" duration="16808000" />
-      <workItem from="1489790799000" duration="45806000" />
+      <workItem from="1489790799000" duration="45854000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101257000" />
+    <option name="totallyTimeSpent" value="101305000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-254" y="-1080" width="1404" height="877" extended-state="0" />
@@ -670,18 +658,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="640">
           <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <marker date="1490121823000" expanded="true" signature="0:432" ph="{&quot;name&quot;: &quot;short-lnk&quot;...}" />
-            <marker date="1490121823000" expanded="true" signature="57:88" ph="{&quot;start&quot;: &quot;meteor run&quot;...}" />
-            <marker date="1490121823000" expanded="true" signature="108:430" ph="{&quot;babel-runtime&quot;: &quot;^6.20.0&quot;...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -925,6 +901,14 @@
           <folding>
             <element signature="e#0#52#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
